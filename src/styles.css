@@ -1,3 +1,8 @@
+body {
+  display: flex;
+  justify-content: center;
+}
+
 .carousel {
   display: inline-block;
   border: 1px solid gray;
@@ -31,4 +36,27 @@
   opacity: 30%;
   height: 40px;
   cursor: pointer;
+}
+
+.carousel .selector {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.carousel .selector button.dot {
+  cursor: pointer;
+  height: 16px;
+  width: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 100%;
+  opacity: 70%;
+}
+
+.carousel .selector button.dot.visible {
+  background-color: darkgrey;
 }

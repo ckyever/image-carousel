@@ -49,7 +49,32 @@ export class Carousel {
       this.carouselElement.appendChild(nextButton);
     }
 
+    this.selector = this.generateSlideSelector();
+    this.carouselElement.appendChild(this.selector);
+
     this.carouselImageList = this.carouselElement.querySelectorAll("img.slide");
+    this.selectorList = this.selector.querySelectorAll("button.dot");
+  }
+
+  generateSlideSelector() {
+    const selector = document.createElement("div");
+    selector.classList = "selector";
+
+    for (let i = 0; i < this.images.length; i++) {
+      const selectorButton = document.createElement("button");
+      selectorButton.classList = "dot";
+      if (i === this.currentImageIndex) {
+        selectorButton.classList.add(Carousel.visibleClassName);
+      }
+      selectorButton.dataset.index = i;
+      selectorButton.addEventListener("click", (event) => {
+        this.hide(this.currentImageIndex);
+        this.show(event.target.dataset.index);
+      });
+      selector.appendChild(selectorButton);
+    }
+
+    return selector;
   }
 
   next() {
@@ -57,10 +82,7 @@ export class Carousel {
       return;
     }
 
-    // Make current slide hidden
-    this.carouselImageList[this.currentImageIndex].classList.remove(
-      Carousel.visibleClassName,
-    );
+    this.hide(this.currentImageIndex);
 
     if (this.currentImageIndex === this.images.length - 1) {
       // At end of carousel so start from beginning
@@ -69,10 +91,7 @@ export class Carousel {
       this.currentImageIndex++;
     }
 
-    // Make next slide visible
-    this.carouselImageList[this.currentImageIndex].classList.add(
-      Carousel.visibleClassName,
-    );
+    this.show(this.currentImageIndex);
   }
 
   previous() {
@@ -80,10 +99,7 @@ export class Carousel {
       return;
     }
 
-    // Make current slide hidden
-    this.carouselImageList[this.currentImageIndex].classList.remove(
-      Carousel.visibleClassName,
-    );
+    this.hide(this.currentImageIndex);
 
     if (this.currentImageIndex === 0) {
       // At end of carousel so start from beginning
@@ -92,9 +108,17 @@ export class Carousel {
       this.currentImageIndex--;
     }
 
-    // Make next slide visible
-    this.carouselImageList[this.currentImageIndex].classList.add(
-      Carousel.visibleClassName,
-    );
+    this.show(this.currentImageIndex);
+  }
+
+  hide(index) {
+    this.carouselImageList[index].classList.remove(Carousel.visibleClassName);
+    this.selectorList[index].classList.remove(Carousel.visibleClassName);
+  }
+
+  show(index) {
+    this.carouselImageList[index].classList.add(Carousel.visibleClassName);
+    this.selectorList[index].classList.add(Carousel.visibleClassName);
+    this.currentImageIndex = index;
   }
 }
