@@ -1,7 +1,29 @@
 export class Carousel {
-  constructor(imageArray) {
+  static visibleClassName = "visible";
+
+  constructor(container, imageArray) {
     this.images = imageArray ?? [];
     this.currentImageIndex = 0;
+
+    if (this.images.length > 0) {
+      this.carouselElement = document.createElement("div");
+      this.carouselElement.classList = "carousel";
+      this.images.forEach((image, index) => {
+        const imageElement = document.createElement("img");
+        imageElement.src = image;
+        imageElement.classList = "slide";
+
+        // Show the first one by default
+        if (index === 0) {
+          imageElement.classList.add(Carousel.visibleClassName);
+        }
+
+        this.carouselElement.appendChild(imageElement);
+      });
+      container.appendChild(this.carouselElement);
+    }
+
+    this.carouselImageList = this.carouselElement.querySelectorAll("img.slide");
   }
 
   next() {
@@ -9,12 +31,22 @@ export class Carousel {
       return;
     }
 
+    // Make current slide hidden
+    this.carouselImageList[this.currentImageIndex].classList.remove(
+      Carousel.visibleClassName,
+    );
+
     if (this.currentImageIndex === this.images.length - 1) {
       // At end of carousel so start from beginning
       this.currentImageIndex = 0;
     } else {
       this.currentImageIndex++;
     }
+
+    // Make next slide visible
+    this.carouselImageList[this.currentImageIndex].classList.add(
+      Carousel.visibleClassName,
+    );
   }
 
   previous() {
@@ -22,12 +54,22 @@ export class Carousel {
       return;
     }
 
+    // Make current slide hidden
+    this.carouselImageList[this.currentImageIndex].classList.remove(
+      Carousel.visibleClassName,
+    );
+
     if (this.currentImageIndex === 0) {
       // At end of carousel so start from beginning
       this.currentImageIndex = this.images.length - 1;
     } else {
       this.currentImageIndex--;
     }
+
+    // Make next slide visible
+    this.carouselImageList[this.currentImageIndex].classList.add(
+      Carousel.visibleClassName,
+    );
   }
 
   getCurrentImage() {
