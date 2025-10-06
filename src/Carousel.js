@@ -97,8 +97,4 @@ export class Carousel {
       Carousel.visibleClassName,
     );
   }
-
-  getCurrentImage() {
-    return this.images[this.currentImageIndex];
-  }
 }
