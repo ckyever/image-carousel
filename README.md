@@ -1,12 +1,12 @@
-# Webpack Template
+# Image Carousel
 
-A template intended for projects built with HTML5, CSS3, and JavaScript (ES6+), bundled and optimized using Webpack.
+An image carousel demo built with HTML5, CSS3, and JavaScript (ES6+), bundled and optimized using Webpack.
 
-👉 [Live Demo](https://github.com/ckyever/webpack-template)
+👉 [Live Demo](https://ckyever.github.io/image-carousel)
 
 ## Acknowledgement
 
-Inspired from [The Odin Project](https://www.theodinproject.com/lessons/node-path-javascript-revisiting-webpack)
+Inspired from [The Odin Project](https://www.theodinproject.com/lessons/node-path-javascript-dynamic-user-interface-interactions)
 
 ## License
 
