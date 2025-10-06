@@ -17,3 +17,7 @@ const images = [
 
 const container = document.querySelector("div.container");
 const headphoneCarousel = new Carousel(container, images);
+
+const autoNext = setInterval(() => {
+  headphoneCarousel.next();
+}, 5000);
