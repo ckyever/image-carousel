@@ -1,0 +1,7 @@
+img.slide {
+  display: none;
+}
+
+img.slide.visible {
+  display: block;
+}
